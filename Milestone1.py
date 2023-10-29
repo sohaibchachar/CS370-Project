@@ -6,7 +6,7 @@ from pytube import YouTube, Playlist
 import os
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
-save_path = os.path.join("E:","videos")
+save_path = os.path.join("videos")
 videos = ["https://www.youtube.com/watch?v=mz51C3Rx6DE&list=PLI1yx5Z0Lrv77D_g1tvF9u3FVqnrNbCRL&index=67",
             "https://www.youtube.com/watch?v=47aaaFhGtMM&list=PLI1yx5Z0Lrv77D_g1tvF9u3FVqnrNbCRL&index=80",
             "https://www.youtube.com/watch?v=FmwP-b2rqEc&list=PLI1yx5Z0Lrv77D_g1tvF9u3FVqnrNbCRL&index=73",
