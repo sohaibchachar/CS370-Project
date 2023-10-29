@@ -17,22 +17,22 @@ videos = ["https://www.youtube.com/watch?v=mz51C3Rx6DE&list=PLI1yx5Z0Lrv77D_g1tv
             "https://www.youtube.com/watch?v=OvtrnLGeGlM&list=PLI1yx5Z0Lrv77D_g1tvF9u3FVqnrNbCRL&index=83",
             "https://www.youtube.com/watch?v=bGaHCEZZNMI&list=PLI1yx5Z0Lrv77D_g1tvF9u3FVqnrNbCRL&index=78",
             "https://www.youtube.com/watch?v=J6ILxNs1CdA&list=PLI1yx5Z0Lrv77D_g1tvF9u3FVqnrNbCRL&index=68"]
-def sanitize_filename(filename):
-    return re.sub(r'[\\/*?:"<>|]', "", filename)            
+def cleaned_video(video_name):
+    return re.sub(r'[\\/*?:"<>|]', "", video_name)            
 for url in videos:
     yt = YouTube(url)
     video_id = yt.video_id
-    yt_title_sanitized = sanitize_filename(yt.title)
+    yt_title_cleaned = cleaned_video(yt.title)
 
     video_stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
     if video_stream:
-        full_file_path = os.path.join(save_path, yt_title_sanitized + ".mp4")
+        full_file_path = os.path.join(save_path, yt_title_cleaned + ".mp4")
         print("Downloading to:", full_file_path)
-        video_stream.download(output_path=save_path, filename=yt_title_sanitized + ".mp4") 
+        video_stream.download(save_path, yt_title_cleaned + ".mp4") 
     caption = YouTubeTranscriptApi.get_transcript(video_id)
     if caption:
         caption_text = "\n".join([f"{c['text']}" for c in caption])
-        with open(os.path.join(save_path, yt_title_sanitized + ".txt"), "w", encoding="utf-8") as file:
+        with open(os.path.join(save_path, yt_title_cleaned + ".txt"), "w", encoding="utf-8") as file:
             file.write(caption_text)       
 
 # %% [markdown]
