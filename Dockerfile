@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM PYTHON:3.11.5-slim
+FROM PYTHON:3.11.6-slim
 
 # Set the working directory in the container to /app
 WORKDIR /app
@@ -20,4 +20,4 @@ EXPOSE 8888
 ENV NAME World
 
 # Run jupyter notebook when the container launches
-CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+CMD 
